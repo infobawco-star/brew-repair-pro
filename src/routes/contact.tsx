@@ -176,9 +176,11 @@ function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-primary py-3.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.02]"
+                  disabled={sending}
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-60"
                 >
-                  إرسال الطلب
+                  {sending && <Loader2 className="size-4 animate-spin" />}
+                  {sending ? "جارٍ الإرسال..." : "إرسال الطلب"}
                 </button>
               </form>
             )}
