@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Phone, Mail, MapPin } from "lucide-react";
+import { CheckCircle2, Loader2, Phone, Mail, MapPin } from "lucide-react";
+import { toast } from "sonner";
 import { PageShell, PageHero } from "../components/site/PageShell";
+import { submitServiceRequest } from "../lib/service-request.functions";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -27,10 +29,35 @@ const inputCls =
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    if (sending) return;
+    setSending(true);
+    const fd = new FormData(e.currentTarget);
+    try {
+      await submitServiceRequest({
+        data: {
+          name: String(fd.get("name") ?? ""),
+          phone: String(fd.get("phone") ?? ""),
+          cafe: String(fd.get("cafe") ?? ""),
+          city: String(fd.get("city") ?? ""),
+          device: String(fd.get("device") ?? ""),
+          service: String(fd.get("service") ?? ""),
+          details: String(fd.get("details") ?? ""),
+        },
+      });
+      setSent(true);
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message.includes("الجوال")
+          ? "رقم الجوال غير صحيح، تأكد من الصيغة 05xxxxxxxx"
+          : "تعذر إرسال الطلب، حاول مرة أخرى";
+      toast.error(message);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -149,9 +176,11 @@ function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-primary py-3.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.02]"
+                  disabled={sending}
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-60"
                 >
-                  إرسال الطلب
+                  {sending && <Loader2 className="size-4 animate-spin" />}
+                  {sending ? "جارٍ الإرسال..." : "إرسال الطلب"}
                 </button>
               </form>
             )}
