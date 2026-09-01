@@ -52,7 +52,7 @@ export function SiteFooter() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="size-4 text-primary" />
-                  <span dir="ltr">care@fixbar.sa</span>
+                  <span dir="ltr">care@fixbarsa.com</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin className="size-4 text-primary" />

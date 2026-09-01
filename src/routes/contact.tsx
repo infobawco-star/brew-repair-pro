@@ -205,7 +205,7 @@ function ContactPage() {
                   </span>
                   <div>
                     <p className="text-muted-foreground">البريد الإلكتروني</p>
-                    <p className="font-bold" dir="ltr">care@fixbar.sa</p>
+                    <p className="font-bold" dir="ltr">care@fixbarsa.com</p>
                   </div>
                 </li>
                 <li className="flex items-center gap-3">

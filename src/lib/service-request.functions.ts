@@ -16,7 +16,7 @@ const requestSchema = z.object({
 });
 
 // البريد الذي تصله إشعارات الطلبات — عدّله لبريدك الفعلي
-const OWNER_EMAIL = "care@fixbar.sa";
+const OWNER_EMAIL = "care@fixbarsa.com";
 
 export const submitServiceRequest = createServerFn({ method: "POST" })
   .inputValidator((data) => requestSchema.parse(data))
