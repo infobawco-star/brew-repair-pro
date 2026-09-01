@@ -21,17 +21,20 @@ const OWNER_EMAIL = "care@fixbarsa.com";
 export const submitServiceRequest = createServerFn({ method: "POST" })
   .inputValidator((data) => requestSchema.parse(data))
   .handler(async ({ data }) => {
-    const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+    try {
+      const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
 
-    const result = await sendTemplateEmail("service-request", OWNER_EMAIL, {
-      templateData: { ...data },
-      idempotencyKey: `service-request-${data.phone}-${Date.now()}`,
-    });
+      const result = await sendTemplateEmail("service-request", OWNER_EMAIL, {
+        templateData: { ...data },
+        idempotencyKey: `service-request-${data.phone}-${Date.now()}`,
+      });
 
-    if (!result.sent && result.reason === "error") {
-      console.error("Service request email failed:", result.message);
+      if (!result.sent && result.reason === "error") {
+        console.error("Service request email failed:", result.message);
+      }
+    } catch (error) {
+      console.error("Service request email failed:", error);
     }
 
-    // نُعيد نجاحاً دائماً حتى لا تتسرب حالة الإرسال الداخلية للعميل
     return { ok: true };
   });
