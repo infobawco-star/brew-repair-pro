@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { CONTACT } from "../lib/contact.config";
 
 export function SiteFooter() {
   return (
@@ -48,7 +49,7 @@ export function SiteFooter() {
               <ul className="mt-3 space-y-2.5 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Phone className="size-4 text-primary" />
-                  <span dir="ltr">+966 55 000 0000</span>
+                  <span dir="ltr">{CONTACT.phoneDisplay}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="size-4 text-primary" />
