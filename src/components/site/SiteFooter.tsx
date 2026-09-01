@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { CONTACT } from "../lib/contact.config";
+import { CONTACT } from "../../lib/contact.config";
 
 export function SiteFooter() {
   return (
