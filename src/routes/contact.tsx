@@ -1,9 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { CircleCheck as CheckCircle2, Loader as Loader2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
-import { toast } from "sonner";
+import { CheckCircle2, Loader2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { PageShell, PageHero } from "../components/site/PageShell";
-import { submitServiceRequest } from "../lib/service-request.functions";
 import { CONTACT } from "../lib/contact.config";
 
 export const Route = createFileRoute("/contact")({
@@ -60,7 +58,7 @@ function ContactPage() {
   const [sending, setSending] = useState(false);
   const [waUrl, setWaUrl] = useState("");
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (sending) return;
     setSending(true);
@@ -74,21 +72,11 @@ function ContactPage() {
       service: String(fd.get("service") ?? ""),
       details: String(fd.get("details") ?? ""),
     };
-    try {
-      await submitServiceRequest({ data: payload });
-      const url = buildWhatsappUrl(payload);
-      setWaUrl(url);
-      setSent(true);
-      window.open(url, "_blank", "noopener,noreferrer");
-    } catch (error) {
-      const message =
-        error instanceof Error && error.message.includes("الجوال")
-          ? "رقم الجوال غير صحيح، تأكد من الصيغة 05xxxxxxxx"
-          : "تعذر إرسال الطلب، حاول مرة أخرى";
-      toast.error(message);
-    } finally {
-      setSending(false);
-    }
+    const url = buildWhatsappUrl(payload);
+    setWaUrl(url);
+    setSent(true);
+    setSending(false);
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
