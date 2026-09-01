@@ -4,8 +4,8 @@ import { EmailAPIError, sendLovableEmail } from "@lovable.dev/email-js";
 
 import { TEMPLATES } from "./registry";
 
-// النطاق المفوَّض لإرسال الإيميلات — يُفعَّل بعد شراء fixbarsa.com وإكمال إعداد البريد
-export const SENDER_DOMAIN = "notify.fixbarsa.com";
+// النطاق المفوَّض لإرسال الإيميلات
+export const SENDER_DOMAIN = "real.fixbarsa.com";
 export const FROM_DOMAIN = "fixbarsa.com";
 const FROM_ADDRESS = `FixBar <no-reply@${FROM_DOMAIN}>`;
 
