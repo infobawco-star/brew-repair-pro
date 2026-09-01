@@ -27,28 +27,58 @@ export const Route = createFileRoute("/contact")({
 const inputCls =
   "w-full rounded-lg border border-input bg-background/70 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-hidden transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30";
 
+// رقم واتساب الأعمال (صيغة دولية بدون + أو مسافات) — عدّله عند توفر الرقم الفعلي
+export const WHATSAPP_NUMBER = "966550000000";
+
+type RequestData = {
+  name: string;
+  phone: string;
+  cafe: string;
+  city: string;
+  device: string;
+  service: string;
+  details: string;
+};
+
+function buildWhatsappUrl(d: RequestData) {
+  const lines = [
+    "طلب صيانة جديد — FixBar",
+    `الاسم: ${d.name}`,
+    `الجوال: ${d.phone}`,
+    `المقهى: ${d.cafe}`,
+    `المدينة: ${d.city}`,
+    `نوع الجهاز: ${d.device}`,
+    `نوع الخدمة: ${d.service}`,
+    d.details ? `وصف المشكلة: ${d.details}` : "",
+  ].filter(Boolean);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
 function ContactPage() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [waUrl, setWaUrl] = useState("");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (sending) return;
     setSending(true);
     const fd = new FormData(e.currentTarget);
+    const payload: RequestData = {
+      name: String(fd.get("name") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      cafe: String(fd.get("cafe") ?? ""),
+      city: String(fd.get("city") ?? ""),
+      device: String(fd.get("device") ?? ""),
+      service: String(fd.get("service") ?? ""),
+      details: String(fd.get("details") ?? ""),
+    };
     try {
-      await submitServiceRequest({
-        data: {
-          name: String(fd.get("name") ?? ""),
-          phone: String(fd.get("phone") ?? ""),
-          cafe: String(fd.get("cafe") ?? ""),
-          city: String(fd.get("city") ?? ""),
-          device: String(fd.get("device") ?? ""),
-          service: String(fd.get("service") ?? ""),
-          details: String(fd.get("details") ?? ""),
-        },
-      });
+      await submitServiceRequest({ data: payload });
+      const url = buildWhatsappUrl(payload);
+      setWaUrl(url);
       setSent(true);
+      window.open(url, "_blank", "noopener,noreferrer");
     } catch (error) {
       const message =
         error instanceof Error && error.message.includes("الجوال")
