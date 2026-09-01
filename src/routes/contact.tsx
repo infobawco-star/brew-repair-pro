@@ -108,16 +108,29 @@ function ContactPage() {
                 </span>
                 <h2 className="mt-5 text-2xl font-extrabold">تم استلام طلبك</h2>
                 <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                  شكراً لك! سيتواصل معك فريق FixBar قريباً لتأكيد تفاصيل الصيانة
-                  والموعد المناسب.
+                  شكراً لك! فتحنا لك محادثة واتساب بتفاصيل طلبك — أرسلها لنا
+                  لتسريع التواصل، وسيتواصل معك فريق FixBar قريباً.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setSent(false)}
-                  className="mt-6 rounded-full border border-border px-6 py-2.5 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
-                >
-                  إرسال طلب آخر
-                </button>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                  {waUrl ? (
+                    <a
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-105"
+                    >
+                      <MessageCircle className="size-4" />
+                      متابعة عبر واتساب
+                    </a>
+                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => setSent(false)}
+                    className="rounded-full border border-border px-6 py-2.5 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
+                  >
+                    إرسال طلب آخر
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={onSubmit} className="space-y-5">
