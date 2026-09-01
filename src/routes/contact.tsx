@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { CircleCheck as CheckCircle2, Loader as Loader2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { PageShell, PageHero } from "../components/site/PageShell";
 import { submitServiceRequest } from "../lib/service-request.functions";
@@ -52,7 +52,7 @@ function buildWhatsappUrl(d: RequestData) {
     `نوع الخدمة: ${d.service}`,
     d.details ? `وصف المشكلة: ${d.details}` : "",
   ].filter(Boolean);
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+  return `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(lines.join("\n"))}`;
 }
 
 function ContactPage() {
