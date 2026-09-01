@@ -4,6 +4,7 @@ import { CheckCircle2, Loader2, Phone, Mail, MapPin, MessageCircle } from "lucid
 import { toast } from "sonner";
 import { PageShell, PageHero } from "../components/site/PageShell";
 import { submitServiceRequest } from "../lib/service-request.functions";
+import { CONTACT } from "../lib/contact.config";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -27,8 +28,8 @@ export const Route = createFileRoute("/contact")({
 const inputCls =
   "w-full rounded-lg border border-input bg-background/70 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-hidden transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30";
 
-// رقم واتساب الأعمال (صيغة دولية بدون + أو مسافات) — عدّله عند توفر الرقم الفعلي
-export const WHATSAPP_NUMBER = "966550000000";
+// رقم واتساب الأعمال — مأخوذ من إعدادات التواصل المركزية
+const WHATSAPP_NUMBER = CONTACT.phone;
 
 type RequestData = {
   name: string;
@@ -239,7 +240,7 @@ function ContactPage() {
                   </span>
                   <div>
                     <p className="text-muted-foreground">الخط الساخن</p>
-                    <p className="font-bold" dir="ltr">+966 55 000 0000</p>
+                    <p className="font-bold" dir="ltr">{CONTACT.phoneDisplay}</p>
                   </div>
                 </li>
                 <li className="flex items-center gap-3">
