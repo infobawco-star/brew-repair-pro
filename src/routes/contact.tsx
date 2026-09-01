@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, Phone, Mail, MapPin } from "lucide-react";
+import { CheckCircle2, Loader2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { PageShell, PageHero } from "../components/site/PageShell";
 import { submitServiceRequest } from "../lib/service-request.functions";
@@ -27,28 +27,58 @@ export const Route = createFileRoute("/contact")({
 const inputCls =
   "w-full rounded-lg border border-input bg-background/70 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-hidden transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30";
 
+// رقم واتساب الأعمال (صيغة دولية بدون + أو مسافات) — عدّله عند توفر الرقم الفعلي
+export const WHATSAPP_NUMBER = "966550000000";
+
+type RequestData = {
+  name: string;
+  phone: string;
+  cafe: string;
+  city: string;
+  device: string;
+  service: string;
+  details: string;
+};
+
+function buildWhatsappUrl(d: RequestData) {
+  const lines = [
+    "طلب صيانة جديد — FixBar",
+    `الاسم: ${d.name}`,
+    `الجوال: ${d.phone}`,
+    `المقهى: ${d.cafe}`,
+    `المدينة: ${d.city}`,
+    `نوع الجهاز: ${d.device}`,
+    `نوع الخدمة: ${d.service}`,
+    d.details ? `وصف المشكلة: ${d.details}` : "",
+  ].filter(Boolean);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
 function ContactPage() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [waUrl, setWaUrl] = useState("");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (sending) return;
     setSending(true);
     const fd = new FormData(e.currentTarget);
+    const payload: RequestData = {
+      name: String(fd.get("name") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      cafe: String(fd.get("cafe") ?? ""),
+      city: String(fd.get("city") ?? ""),
+      device: String(fd.get("device") ?? ""),
+      service: String(fd.get("service") ?? ""),
+      details: String(fd.get("details") ?? ""),
+    };
     try {
-      await submitServiceRequest({
-        data: {
-          name: String(fd.get("name") ?? ""),
-          phone: String(fd.get("phone") ?? ""),
-          cafe: String(fd.get("cafe") ?? ""),
-          city: String(fd.get("city") ?? ""),
-          device: String(fd.get("device") ?? ""),
-          service: String(fd.get("service") ?? ""),
-          details: String(fd.get("details") ?? ""),
-        },
-      });
+      await submitServiceRequest({ data: payload });
+      const url = buildWhatsappUrl(payload);
+      setWaUrl(url);
       setSent(true);
+      window.open(url, "_blank", "noopener,noreferrer");
     } catch (error) {
       const message =
         error instanceof Error && error.message.includes("الجوال")
@@ -78,16 +108,29 @@ function ContactPage() {
                 </span>
                 <h2 className="mt-5 text-2xl font-extrabold">تم استلام طلبك</h2>
                 <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                  شكراً لك! سيتواصل معك فريق FixBar قريباً لتأكيد تفاصيل الصيانة
-                  والموعد المناسب.
+                  شكراً لك! فتحنا لك محادثة واتساب بتفاصيل طلبك — أرسلها لنا
+                  لتسريع التواصل، وسيتواصل معك فريق FixBar قريباً.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setSent(false)}
-                  className="mt-6 rounded-full border border-border px-6 py-2.5 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
-                >
-                  إرسال طلب آخر
-                </button>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                  {waUrl ? (
+                    <a
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-105"
+                    >
+                      <MessageCircle className="size-4" />
+                      متابعة عبر واتساب
+                    </a>
+                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => setSent(false)}
+                    className="rounded-full border border-border px-6 py-2.5 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
+                  >
+                    إرسال طلب آخر
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={onSubmit} className="space-y-5">
@@ -205,7 +248,7 @@ function ContactPage() {
                   </span>
                   <div>
                     <p className="text-muted-foreground">البريد الإلكتروني</p>
-                    <p className="font-bold" dir="ltr">care@fixbar.sa</p>
+                    <p className="font-bold" dir="ltr">care@fixbarsa.com</p>
                   </div>
                 </li>
                 <li className="flex items-center gap-3">
