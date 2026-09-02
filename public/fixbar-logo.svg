@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530 200" fill="none">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#glow)">
+    <circle cx="55" cy="100" r="28" fill="none" stroke="#22c55e" stroke-width="3"/>
+    <path d="M55 72 L55 128 M40 85 Q55 80 70 85 M40 100 Q55 95 70 100" stroke="#22c55e" stroke-width="3" stroke-linecap="round" fill="none"/>
+  </g>
+  <text x="105" y="115" font-family="system-ui, sans-serif" font-size="72" font-weight="900" fill="#f0f0f0" letter-spacing="-2">
+    Fix<tspan fill="#22c55e" filter="url(#glow)">Bar</tspan>
+  </text>
+</svg>

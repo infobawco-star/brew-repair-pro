@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import type { Locale } from "./PageShell";
-import logoAsset from "../../assets/fixbar-logo.png.asset.json";
+import { LOGO_URL } from "./logo";
 
 export function SiteHeader({ locale = "ar" }: { locale?: Locale }) {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +34,7 @@ export function SiteHeader({ locale = "ar" }: { locale?: Locale }) {
       <div className="relative mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-5 py-3 md:px-8">
         <Link to={english ? "/en" : "/"} className="relative z-10 flex shrink-0 items-center">
           <span className="logo-neon block h-12 w-36 shrink-0 overflow-hidden md:h-14 md:w-44">
-            <img src={logoAsset.url} alt="FixBar" width={1590} height={600} className="size-full object-contain" />
+            <img src={LOGO_URL} alt="FixBar" className="size-full object-contain" />
           </span>
         </Link>
 

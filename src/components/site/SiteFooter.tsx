@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { CONTACT } from "../../lib/contact.config";
 import type { Locale } from "./PageShell";
-import logoAsset from "../../assets/fixbar-logo.png.asset.json";
+import { LOGO_URL } from "./logo";
 
 export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
   const english = locale === "en";
@@ -12,7 +12,7 @@ export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
       <div className="mx-auto max-w-7xl px-5 py-14 md:px-8">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
-            <img src={logoAsset.url} alt="FixBar" width={1590} height={600} className="logo-neon h-16 w-48 object-contain" />
+            <img src={LOGO_URL} alt="FixBar" className="logo-neon h-16 w-48 object-contain" />
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               {english ? "Keeping your café equipment performing at its best with preventive maintenance, responsive repairs, and genuine parts." : "نبقي أجهزة مقهاك تعمل بأفضل حالاتها — صيانة دورية، إصلاح أعطال، وقطع غيار أصلية بفريق فني معتمد."}
             </p>
