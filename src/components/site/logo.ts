@@ -1,1 +1,1 @@
-export const LOGO_URL = "/fixbar-logo.svg";
+export const LOGO_URL = "/fixbar-logo-official.svg";

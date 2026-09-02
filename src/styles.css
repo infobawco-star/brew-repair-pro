@@ -96,7 +96,26 @@
 }
 
 @utility logo-neon {
-  filter: drop-shadow(0 0 7px color-mix(in oklab, var(--color-primary) 52%, transparent));
+  filter:
+    drop-shadow(0 0 4px color-mix(in oklab, var(--color-primary) 60%, transparent))
+    drop-shadow(0 0 12px color-mix(in oklab, var(--color-primary) 40%, transparent))
+    drop-shadow(0 0 24px color-mix(in oklab, var(--color-primary) 20%, transparent));
+  animation: logo-pulse 4s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 4px color-mix(in oklab, var(--color-primary) 60%, transparent))
+      drop-shadow(0 0 12px color-mix(in oklab, var(--color-primary) 40%, transparent))
+      drop-shadow(0 0 24px color-mix(in oklab, var(--color-primary) 20%, transparent));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 6px color-mix(in oklab, var(--color-primary) 75%, transparent))
+      drop-shadow(0 0 18px color-mix(in oklab, var(--color-primary) 55%, transparent))
+      drop-shadow(0 0 36px color-mix(in oklab, var(--color-primary) 30%, transparent));
+  }
 }
 
 @utility bg-grid {

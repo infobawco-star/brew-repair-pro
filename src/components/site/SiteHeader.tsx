@@ -33,7 +33,7 @@ export function SiteHeader({ locale = "ar" }: { locale?: Locale }) {
     >
       <div className="relative mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-5 py-3 md:px-8">
         <Link to={english ? "/en" : "/"} className="relative z-10 flex shrink-0 items-center">
-          <span className="logo-neon block h-12 w-36 shrink-0 overflow-hidden md:h-14 md:w-44">
+          <span className="logo-neon block h-14 w-44 shrink-0 overflow-hidden md:h-16 md:w-52">
             <img src={LOGO_URL} alt="FixBar" className="size-full object-contain" />
           </span>
         </Link>
