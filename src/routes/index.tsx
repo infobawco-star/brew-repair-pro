@@ -40,7 +40,7 @@ const brands = [
   "VICTORIA ARDUINO",
   "MAHLKÖNIG",
   "ROCKET",
-  "ECM",
+  "SYNESSO",
   "FAEMA",
   "SANREMO",
 ];
