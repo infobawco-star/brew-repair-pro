@@ -31,14 +31,14 @@ export function SiteHeader({ locale = "ar" }: { locale?: Locale }) {
           : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto grid h-20 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3 md:px-8">
-        <Link to={english ? "/en" : "/"} className="flex min-w-0 items-center">
+      <div className="relative mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-5 py-3 md:px-8">
+        <Link to={english ? "/en" : "/"} className="relative z-10 flex shrink-0 items-center">
           <span className="logo-neon block h-12 w-36 shrink-0 overflow-hidden md:h-14 md:w-44">
             <img src={logoAsset.url} alt="FixBar" width={1590} height={600} className="size-full object-contain" />
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex">
           {links.map((l) => (
             <Link
               key={l.to}
@@ -52,7 +52,7 @@ export function SiteHeader({ locale = "ar" }: { locale?: Locale }) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="relative z-10 flex items-center gap-2">
           <Link
             to={english ? "/" : "/en"}
             aria-label={english ? "العربية" : "English"}
