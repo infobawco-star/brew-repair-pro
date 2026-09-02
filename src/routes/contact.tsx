@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { CheckCircle2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { PageShell, PageHero } from "../components/site/PageShell";
 import { CONTACT } from "../lib/contact.config";
 
@@ -55,13 +55,10 @@ function buildWhatsappUrl(d: RequestData) {
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
-  const [sending, setSending] = useState(false);
   const [waUrl, setWaUrl] = useState("");
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (sending) return;
-    setSending(true);
     const fd = new FormData(e.currentTarget);
     const payload: RequestData = {
       name: String(fd.get("name") ?? ""),
@@ -75,7 +72,6 @@ function ContactPage() {
     const url = buildWhatsappUrl(payload);
     setWaUrl(url);
     setSent(true);
-    setSending(false);
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
@@ -208,11 +204,10 @@ function ContactPage() {
 
                 <button
                   type="submit"
-                  disabled={sending}
                   className="flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-60"
                 >
-                  {sending && <Loader2 className="size-4 animate-spin" />}
-                  {sending ? "جارٍ الإرسال..." : "إرسال الطلب"}
+                  <MessageCircle className="size-4" />
+                  إرسال عبر واتساب
                 </button>
               </form>
             )}

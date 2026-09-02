@@ -95,6 +95,10 @@
     0 24px 60px -24px color-mix(in oklab, var(--color-primary) 30%, transparent);
 }
 
+@utility logo-neon {
+  filter: drop-shadow(0 0 7px color-mix(in oklab, var(--color-primary) 52%, transparent));
+}
+
 @utility bg-grid {
   background-image:
     linear-gradient(to left, color-mix(in oklab, var(--color-primary) 6%, transparent) 1px, transparent 1px),

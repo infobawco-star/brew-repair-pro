@@ -2,12 +2,14 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
 
-export function PageShell({ children }: { children: ReactNode }) {
+export type Locale = "ar" | "en";
+
+export function PageShell({ children, locale = "ar" }: { children: ReactNode; locale?: Locale }) {
   return (
-    <div className="min-h-screen bg-background">
-      <SiteHeader />
+    <div className="min-h-screen bg-background" lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+      <SiteHeader locale={locale} />
       <main id="main-content">{children}</main>
-      <SiteFooter />
+      <SiteFooter locale={locale} />
     </div>
   );
 }
@@ -16,13 +18,15 @@ export function PageHero({
   eyebrow,
   title,
   subtitle,
+  locale = "ar",
 }: {
   eyebrow: string;
   title: string;
   subtitle: string;
+  locale?: Locale;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-border pt-32 pb-16">
+    <section lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="relative overflow-hidden border-b border-border pt-32 pb-16">
       <div className="bg-grid absolute inset-0 opacity-50" aria-hidden />
       <div
         className="absolute -top-24 left-1/3 size-96 rounded-full bg-primary/12 blur-3xl"

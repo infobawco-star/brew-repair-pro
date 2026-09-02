@@ -1,17 +1,20 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import type { Locale } from "./PageShell";
+import logoAsset from "../../assets/fixbar-logo.png.asset.json";
 
-const links = [
-  { to: "/", label: "الرئيسية" },
-  { to: "/services", label: "الخدمات" },
-  { to: "/pricing", label: "الباقات" },
-  { to: "/about", label: "من نحن" },
-] as const;
-
-export function SiteHeader() {
+export function SiteHeader({ locale = "ar" }: { locale?: Locale }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const english = locale === "en";
+  const prefix = english ? "/en" : "";
+  const links = [
+    { to: english ? "/en" : "/", label: english ? "Home" : "الرئيسية" },
+    { to: `${prefix}/services`, label: english ? "Services" : "الخدمات" },
+    { to: `${prefix}/pricing`, label: english ? "Plans" : "الباقات" },
+    { to: `${prefix}/about`, label: english ? "About" : "من نحن" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -28,13 +31,10 @@ export function SiteHeader() {
           : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8">
-        <Link to="/" className="flex items-center gap-2.5">
-          <span className="relative flex size-9 items-center justify-center rounded-lg bg-primary/12 ring-1 ring-primary/40">
-            <span className="size-2.5 rounded-full bg-primary shadow-[0_0_16px_var(--color-primary)]" />
-          </span>
-          <span className="text-xl font-extrabold tracking-tight">
-            Fix<span className="text-primary">Bar</span>
+      <div className="mx-auto grid h-20 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3 md:px-8">
+        <Link to={english ? "/en" : "/"} className="flex min-w-0 items-center">
+          <span className="logo-neon block h-12 w-36 shrink-0 overflow-hidden md:h-14 md:w-44">
+            <img src={logoAsset.url} alt="FixBar" width={1590} height={600} className="size-full object-contain" />
           </span>
         </Link>
 
@@ -43,7 +43,7 @@ export function SiteHeader() {
             <Link
               key={l.to}
               to={l.to}
-              activeOptions={{ exact: l.to === "/" }}
+              activeOptions={{ exact: l.to === "/" || l.to === "/en" }}
               activeProps={{ className: "text-primary" }}
               className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
@@ -54,14 +54,21 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <Link
-            to="/contact"
+            to={english ? "/" : "/en"}
+            aria-label={english ? "العربية" : "English"}
+            className="inline-flex h-10 min-w-11 items-center justify-center rounded-lg border border-primary/30 px-3 text-xs font-bold text-primary transition-colors hover:bg-primary/10"
+          >
+            {english ? "ع" : "EN"}
+          </Link>
+          <Link
+            to={english ? "/en/contact" : "/contact"}
             className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.04] md:inline-flex"
           >
-            اطلب صيانة
+            {english ? "Request service" : "اطلب صيانة"}
           </Link>
           <button
             type="button"
-            aria-label="القائمة"
+            aria-label={english ? "Menu" : "القائمة"}
             onClick={() => setOpen((v) => !v)}
             className="inline-flex size-10 items-center justify-center rounded-lg border border-border text-foreground md:hidden"
           >
@@ -78,7 +85,7 @@ export function SiteHeader() {
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                activeOptions={{ exact: l.to === "/" }}
+                activeOptions={{ exact: l.to === "/" || l.to === "/en" }}
                 activeProps={{ className: "text-primary" }}
                 className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground"
               >
@@ -86,11 +93,11 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              to="/contact"
+              to={english ? "/en/contact" : "/contact"}
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-primary px-5 py-2.5 text-center text-sm font-bold text-primary-foreground"
             >
-              اطلب صيانة
+              {english ? "Request service" : "اطلب صيانة"}
             </Link>
           </nav>
         </div>
