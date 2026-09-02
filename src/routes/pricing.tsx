@@ -25,7 +25,7 @@ export const Route = createFileRoute("/pricing")({
 const tiers = [
   {
     name: "أساسية",
-    price: "٤٩٩",
+    price: "999",
     unit: "ر.س / شهرياً",
     desc: "للمقاهي الناشئة بجهاز إسبريسو واحد.",
     features: [
@@ -38,7 +38,7 @@ const tiers = [
   },
   {
     name: "احترافية",
-    price: "٨٩٩",
+    price: "1499",
     unit: "ر.س / شهرياً",
     desc: "للمقاهي العاملة بكامل طاقتها يومياً.",
     features: [
