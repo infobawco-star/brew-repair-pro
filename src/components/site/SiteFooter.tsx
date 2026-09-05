@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Instagram, Phone, Mail, MapPin } from "lucide-react";
 import { CONTACT } from "../../lib/contact.config";
 import type { Locale } from "./PageShell";
 import { LOGO_URL } from "./logo";
@@ -16,6 +16,26 @@ export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               {english ? "Keeping your café equipment performing at its best with preventive maintenance, responsive repairs, and genuine parts." : "نبقي أجهزة مقهاك تعمل بأفضل حالاتها — صيانة دورية، إصلاح أعطال، وقطع غيار أصلية بفريق فني معتمد."}
             </p>
+            <div className="mt-5 flex items-center gap-3" aria-label={english ? "Follow FixBar" : "تابع FixBar"}>
+              <a
+                href="https://www.tiktok.com/@fixbarsa"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="TikTok FixBar"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background/60 text-muted-foreground transition-all hover:-translate-y-1 hover:border-primary hover:text-primary hover:shadow-[0_0_18px_color-mix(in_oklab,var(--color-primary)_35%,transparent)]"
+              >
+                <TikTokIcon className="size-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/fixbarsa/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram FixBar"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background/60 text-muted-foreground transition-all hover:-translate-y-1 hover:border-primary hover:text-primary hover:shadow-[0_0_18px_color-mix(in_oklab,var(--color-primary)_35%,transparent)]"
+              >
+                <Instagram className="size-5" />
+              </a>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
@@ -70,5 +90,23 @@ export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
         </div>
       </div>
     </footer>
+  );
+}
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M9 3v11.5a3.5 3.5 0 1 1-3.5-3.5" />
+      <path d="M9 3c.7 2.8 2.5 4.5 5.5 4.5V4.5c1.2 1.3 2.6 2 4.5 2" />
+    </svg>
   );
 }
