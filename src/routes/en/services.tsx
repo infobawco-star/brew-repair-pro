@@ -4,7 +4,19 @@ import { PageHero, PageShell } from "../../components/site/PageShell";
 import serviceRepair from "../../assets/service-repair.jpg";
 import serviceMaintenance from "../../assets/service-maintenance.jpg";
 import serviceParts from "../../assets/service-parts.jpg";
-export const Route = createFileRoute("/en/services")({ head: () => ({ meta: [{title:"Maintenance Services — FixBar"},{name:"description",content:"Preventive maintenance, emergency repairs, and genuine parts for professional café equipment."},{property:"og:title",content:"Maintenance Services — FixBar"},{property:"og:description",content:"Complete care for espresso machines and grinders."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}] }), component: Services });
+import { breadcrumbJsonLd, pageHead } from "../../lib/seo";
+export const Route = createFileRoute("/en/services")({
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "en",
+      arPath: "/services",
+      title: "Café Equipment Maintenance Services — FixBar",
+      description:
+        "Preventive maintenance, emergency repairs, and genuine spare parts for professional espresso machines and grinders in Saudi Arabia.",
+      jsonLd: [breadcrumbJsonLd([{ name: "Home", path: "/en" }, { name: "Services", path: "/en/services" }])],
+    }),
+  component: Services });
 const items=[
  {icon:CalendarCheck,image:serviceMaintenance,title:"Preventive maintenance",desc:"Scheduled pressure and temperature checks, deep group cleaning, and proactive replacement of seals and filters.",points:["25-point inspection","Certified deep cleaning","Report after every visit"]},
  {icon:Wrench,image:serviceRepair,title:"Emergency repairs",desc:"Fast diagnosis and on-site repair whenever possible, with temporary replacement equipment when needed.",points:["Response within 24 hours","Free diagnosis for subscribers","Temporary replacement equipment"]},

@@ -5,15 +5,19 @@ import heroMachine from "../../assets/hero-machine.jpg";
 import serviceRepair from "../../assets/service-repair.jpg";
 import serviceMaintenance from "../../assets/service-maintenance.jpg";
 import serviceParts from "../../assets/service-parts.jpg";
+import { businessJsonLd, pageHead } from "../../lib/seo";
 
 export const Route = createFileRoute("/en/")({
-  head: () => ({ meta: [
-    { title: "FixBar | Café Equipment Maintenance" },
-    { name: "description", content: "Professional espresso machine and grinder maintenance, rapid repairs, and genuine spare parts for cafés across Saudi Arabia." },
-    { property: "og:title", content: "FixBar | Café Equipment Maintenance" },
-    { property: "og:description", content: "Preventive maintenance and responsive repairs that keep your café running." },
-    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
-  ]}),
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "en",
+      arPath: "/",
+      title: "FixBar | Café Equipment Maintenance in Saudi Arabia",
+      description:
+        "Professional espresso machine and grinder maintenance, 24-hour repair response, and genuine spare parts for cafés across Saudi Arabia.",
+      jsonLd: [businessJsonLd("en")],
+    }),
   component: EnglishHomePage,
 });
 
