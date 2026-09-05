@@ -3,23 +3,19 @@ import { useState, type FormEvent } from "react";
 import { CheckCircle2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { PageShell, PageHero } from "../components/site/PageShell";
 import { CONTACT } from "../lib/contact.config";
+import { breadcrumbJsonLd, pageHead } from "../lib/seo";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "اطلب خدمة صيانة — FixBar" },
-      {
-        name: "description",
-        content:
-          "أرسل طلب صيانة أو إصلاح لأجهزة مقهاك — صف نوع الجهاز والعطل وسيتواصل معك فني FixBar.",
-      },
-      { property: "og:title", content: "اطلب خدمة صيانة — FixBar" },
-      {
-        property: "og:description",
-        content: "نموذج طلب صيانة وإصلاح أجهزة القهوة للمقاهي.",
-      },
-    ],
-  }),
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "ar",
+      arPath: "/contact",
+      title: "اطلب خدمة صيانة لمقهاك — FixBar",
+      description:
+        "أرسل طلب صيانة أو إصلاح لأجهزة مقهاك عبر واتساب — صف الجهاز والعطل وسيتواصل معك فني FixBar خلال ساعات العمل.",
+      jsonLd: [breadcrumbJsonLd([{ name: "الرئيسية", path: "/" }, { name: "طلب خدمة", path: "/contact" }])],
+    }),
   component: ContactPage,
 });
 

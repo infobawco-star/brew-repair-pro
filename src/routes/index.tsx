@@ -13,24 +13,19 @@ import heroMachine from "../assets/hero-machine.jpg";
 import serviceRepair from "../assets/service-repair.jpg";
 import serviceMaintenance from "../assets/service-maintenance.jpg";
 import serviceParts from "../assets/service-parts.jpg";
+import { businessJsonLd, pageHead } from "../lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "FixBar | صيانة أجهزة المقاهي" },
-      {
-        name: "description",
-        content:
-          "FixBar — صيانة وإصلاح أجهزة الإسبريسو والمطاحن للمقاهي. صيانة دورية، إصلاح أعطال، وقطع غيار أصلية بباقات اشتراك مرنة.",
-      },
-      { property: "og:title", content: "FixBar | صيانة أجهزة المقاهي" },
-      {
-        property: "og:description",
-        content:
-          "صيانة دورية وإصلاح فوري لأجهزة القهوة في مقهاك — بفنيين معتمدين وقطع غيار أصلية.",
-      },
-    ],
-  }),
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "ar",
+      arPath: "/",
+      title: "FixBar | صيانة أجهزة المقاهي في السعودية",
+      description:
+        "صيانة وإصلاح أجهزة الإسبريسو والمطاحن للمقاهي — صيانة دورية، استجابة للأعطال خلال ٢٤ ساعة، وقطع غيار أصلية بباقات مرنة.",
+      jsonLd: [businessJsonLd("ar")],
+    }),
   component: HomePage,
 });
 

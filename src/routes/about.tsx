@@ -1,23 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "../components/site/PageShell";
 import serviceRepair from "../assets/service-repair.jpg";
+import { breadcrumbJsonLd, pageHead } from "../lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "من نحن — FixBar" },
-      {
-        name: "description",
-        content:
-          "FixBar فريق فني سعودي متخصص في صيانة أجهزة الإسبريسو والمطاحن للمقاهي — بدقة، وسرعة، وشفافية.",
-      },
-      { property: "og:title", content: "من نحن — FixBar" },
-      {
-        property: "og:description",
-        content: "فريق فني متخصص في صيانة أجهزة المقاهي في السعودية.",
-      },
-    ],
-  }),
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "ar",
+      arPath: "/about",
+      title: "من نحن — فريق FixBar لصيانة أجهزة القهوة",
+      description:
+        "فريق فني سعودي متخصص في صيانة أجهزة الإسبريسو والمطاحن للمقاهي — دقة، سرعة استجابة، وتقارير شفافة بعد كل زيارة.",
+      jsonLd: [breadcrumbJsonLd([{ name: "الرئيسية", path: "/" }, { name: "من نحن", path: "/about" }])],
+    }),
   component: AboutPage,
 });
 
