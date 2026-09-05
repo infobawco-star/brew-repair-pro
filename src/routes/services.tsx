@@ -75,7 +75,7 @@ function ServicesPage() {
               className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:card-glow"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <img decoding="async"
                   src={s.image}
                   alt={s.title}
                   loading="lazy"

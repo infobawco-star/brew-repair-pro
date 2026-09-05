@@ -44,7 +44,7 @@ function AboutPage() {
       <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="overflow-hidden rounded-2xl border border-border">
-            <img
+            <img decoding="async"
               src={serviceRepair}
               alt="فني FixBar يعاير جهاز إسبريسو"
               loading="lazy"

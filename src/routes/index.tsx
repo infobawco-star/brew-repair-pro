@@ -120,7 +120,7 @@ function HomePage() {
             style={{ animationDelay: "150ms" }}
           >
             <div className="card-glow overflow-hidden rounded-2xl border border-primary/25">
-              <img
+              <img decoding="async"
                 src={heroMachine}
                 alt="فني يفحص آلة إسبريسو احترافية بإضاءة خضراء"
                 width={1280}
@@ -178,7 +178,7 @@ function HomePage() {
               className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:card-glow"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <img decoding="async"
                   src={s.image}
                   alt={s.title}
                   loading="lazy"
