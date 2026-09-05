@@ -13,24 +13,19 @@ import heroMachine from "../assets/hero-machine.jpg";
 import serviceRepair from "../assets/service-repair.jpg";
 import serviceMaintenance from "../assets/service-maintenance.jpg";
 import serviceParts from "../assets/service-parts.jpg";
+import { businessJsonLd, pageHead } from "../lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "FixBar | صيانة أجهزة المقاهي" },
-      {
-        name: "description",
-        content:
-          "FixBar — صيانة وإصلاح أجهزة الإسبريسو والمطاحن للمقاهي. صيانة دورية، إصلاح أعطال، وقطع غيار أصلية بباقات اشتراك مرنة.",
-      },
-      { property: "og:title", content: "FixBar | صيانة أجهزة المقاهي" },
-      {
-        property: "og:description",
-        content:
-          "صيانة دورية وإصلاح فوري لأجهزة القهوة في مقهاك — بفنيين معتمدين وقطع غيار أصلية.",
-      },
-    ],
-  }),
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "ar",
+      arPath: "/",
+      title: "FixBar | صيانة أجهزة المقاهي في السعودية",
+      description:
+        "صيانة وإصلاح أجهزة الإسبريسو والمطاحن للمقاهي — صيانة دورية، استجابة للأعطال خلال ٢٤ ساعة، وقطع غيار أصلية بباقات مرنة.",
+      jsonLd: [businessJsonLd("ar")],
+    }),
   component: HomePage,
 });
 
@@ -125,7 +120,7 @@ function HomePage() {
             style={{ animationDelay: "150ms" }}
           >
             <div className="card-glow overflow-hidden rounded-2xl border border-primary/25">
-              <img
+              <img decoding="async"
                 src={heroMachine}
                 alt="فني يفحص آلة إسبريسو احترافية بإضاءة خضراء"
                 width={1280}
@@ -183,7 +178,7 @@ function HomePage() {
               className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:card-glow"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <img decoding="async"
                   src={s.image}
                   alt={s.title}
                   loading="lazy"

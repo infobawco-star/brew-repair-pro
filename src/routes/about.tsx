@@ -1,23 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "../components/site/PageShell";
 import serviceRepair from "../assets/service-repair.jpg";
+import { breadcrumbJsonLd, pageHead } from "../lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "من نحن — FixBar" },
-      {
-        name: "description",
-        content:
-          "FixBar فريق فني سعودي متخصص في صيانة أجهزة الإسبريسو والمطاحن للمقاهي — بدقة، وسرعة، وشفافية.",
-      },
-      { property: "og:title", content: "من نحن — FixBar" },
-      {
-        property: "og:description",
-        content: "فريق فني متخصص في صيانة أجهزة المقاهي في السعودية.",
-      },
-    ],
-  }),
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "ar",
+      arPath: "/about",
+      title: "من نحن — فريق FixBar لصيانة أجهزة القهوة",
+      description:
+        "فريق فني سعودي متخصص في صيانة أجهزة الإسبريسو والمطاحن للمقاهي — دقة، سرعة استجابة، وتقارير شفافة بعد كل زيارة.",
+      jsonLd: [breadcrumbJsonLd([{ name: "الرئيسية", path: "/" }, { name: "من نحن", path: "/about" }])],
+    }),
   component: AboutPage,
 });
 
@@ -48,7 +44,7 @@ function AboutPage() {
       <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="overflow-hidden rounded-2xl border border-border">
-            <img
+            <img decoding="async"
               src={serviceRepair}
               alt="فني FixBar يعاير جهاز إسبريسو"
               loading="lazy"

@@ -11,24 +11,19 @@ import { PageShell, PageHero } from "../components/site/PageShell";
 import serviceRepair from "../assets/service-repair.jpg";
 import serviceMaintenance from "../assets/service-maintenance.jpg";
 import serviceParts from "../assets/service-parts.jpg";
+import { breadcrumbJsonLd, pageHead } from "../lib/seo";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "خدمات الصيانة — FixBar" },
-      {
-        name: "description",
-        content:
-          "صيانة دورية، إصلاح أعطال طارئة، وتوريد قطع غيار أصلية لأجهزة الإسبريسو والمطاحن في المقاهي.",
-      },
-      { property: "og:title", content: "خدمات الصيانة — FixBar" },
-      {
-        property: "og:description",
-        content:
-          "صيانة دورية، إصلاح أعطال طارئة، وقطع غيار أصلية لأجهزة القهوة الاحترافية.",
-      },
-    ],
-  }),
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "ar",
+      arPath: "/services",
+      title: "خدمات صيانة أجهزة المقاهي — FixBar",
+      description:
+        "صيانة دورية، إصلاح أعطال طارئة، وقطع غيار أصلية لأجهزة الإسبريسو والمطاحن في المقاهي بجميع مناطق المملكة.",
+      jsonLd: [breadcrumbJsonLd([{ name: "الرئيسية", path: "/" }, { name: "الخدمات", path: "/services" }])],
+    }),
   component: ServicesPage,
 });
 
@@ -80,7 +75,7 @@ function ServicesPage() {
               className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:card-glow"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <img decoding="async"
                   src={s.image}
                   alt={s.title}
                   loading="lazy"

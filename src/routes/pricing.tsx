@@ -1,24 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, Sparkles } from "lucide-react";
 import { PageShell, PageHero } from "../components/site/PageShell";
+import { breadcrumbJsonLd, pageHead } from "../lib/seo";
 
 export const Route = createFileRoute("/pricing")({
-  head: () => ({
-    meta: [
-      { title: "الباقات والأسعار — FixBar" },
-      {
-        name: "description",
-        content:
-          "باقات اشتراك شهرية وسنوية لصيانة أجهزة المقاهي: أساسية، احترافية، ومؤسسات — بأسعار واضحة بدون مفاجآت.",
-      },
-      { property: "og:title", content: "الباقات والأسعار — FixBar" },
-      {
-        property: "og:description",
-        content:
-          "باقات صيانة مرنة للمقاهي بأسعار واضحة: أساسية، احترافية، ومؤسسات.",
-      },
-    ],
-  }),
+  staticData: { sitemap: true },
+  head: () =>
+    pageHead({
+      locale: "ar",
+      arPath: "/pricing",
+      title: "باقات وأسعار صيانة المقاهي — FixBar",
+      description:
+        "باقات اشتراك شهرية وسنوية لصيانة أجهزة المقاهي: أساسية، احترافية، ومؤسسات — أسعار واضحة بدون مفاجآت.",
+      jsonLd: [breadcrumbJsonLd([{ name: "الرئيسية", path: "/" }, { name: "الباقات والأسعار", path: "/pricing" }])],
+    }),
   component: PricingPage,
 });
 
