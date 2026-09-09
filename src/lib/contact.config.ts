@@ -2,9 +2,9 @@
 export const CONTACT = {
   email: "care@fixbarsa.com",
   // رقم واتساب/جوال بصيغة دولية بدون + أو مسافات
-  phone: "966548962117",
+  phone: "966500282746",
   // صيغة العرض للفوتر والصفحات
-  phoneDisplay: "+966 54 896 2117",
+  phoneDisplay: "+966 50 028 2746",
   city: "الرياض",
   coverage: "الرياض — تغطية لجميع مناطق المملكة",
 } as const;

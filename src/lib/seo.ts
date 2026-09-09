@@ -71,7 +71,7 @@ export function businessJsonLd(locale: SeoLocale) {
       ? "صيانة وإصلاح أجهزة الإسبريسو والمطاحن للمقاهي في السعودية."
       : "Espresso machine and grinder maintenance and repair for cafés in Saudi Arabia.",
     url: abs(ar ? "/" : "/en"),
-    telephone: "+966548962117",
+    telephone: "+966500282746",
     email: "care@fixbarsa.com",
     image: `${SITE_URL}/fixbar-logo-official.svg`,
     logo: `${SITE_URL}/fixbar-logo-official.svg`,
