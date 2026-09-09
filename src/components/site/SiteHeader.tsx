@@ -14,6 +14,7 @@ export function SiteHeader({ locale = "ar" }: { locale?: Locale }) {
     { to: `${prefix}/services`, label: english ? "Services" : "الخدمات" },
     { to: `${prefix}/pricing`, label: english ? "Plans" : "الباقات" },
     { to: `${prefix}/about`, label: english ? "About" : "من نحن" },
+    { to: `${prefix}/blog`, label: english ? "Blog" : "المدونة" },
   ];
 
   useEffect(() => {

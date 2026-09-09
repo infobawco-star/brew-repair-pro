@@ -15,11 +15,15 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as EnIndexRouteImport } from './routes/en/index'
 import { Route as EnAboutRouteImport } from './routes/en/about'
 import { Route as EnContactRouteImport } from './routes/en/contact'
 import { Route as EnPricingRouteImport } from './routes/en/pricing'
 import { Route as EnServicesRouteImport } from './routes/en/services'
+import { Route as EnBlogIndexRouteImport } from './routes/en/blog/index'
+import { Route as EnBlogSlugRouteImport } from './routes/en/blog/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -51,6 +55,16 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnIndexRoute = EnIndexRouteImport.update({
   id: '/en/',
   path: '/en/',
@@ -76,6 +90,16 @@ const EnServicesRoute = EnServicesRouteImport.update({
   path: '/en/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnBlogIndexRoute = EnBlogIndexRouteImport.update({
+  id: '/en/blog/',
+  path: '/en/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnBlogSlugRoute = EnBlogSlugRouteImport.update({
+  id: '/en/blog/$slug',
+  path: '/en/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -84,11 +108,15 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/contact': typeof EnContactRoute
   '/en/pricing': typeof EnPricingRoute
   '/en/services': typeof EnServicesRoute
+  '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
+  '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/en/blog/': typeof EnBlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -97,11 +125,15 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/contact': typeof EnContactRoute
   '/en/pricing': typeof EnPricingRoute
   '/en/services': typeof EnServicesRoute
+  '/blog': typeof BlogIndexRoute
   '/en': typeof EnIndexRoute
+  '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/en/blog': typeof EnBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -111,11 +143,15 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/contact': typeof EnContactRoute
   '/en/pricing': typeof EnPricingRoute
   '/en/services': typeof EnServicesRoute
+  '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
+  '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/en/blog/': typeof EnBlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -126,11 +162,15 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/services'
     | '/sitemap.xml'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/contact'
     | '/en/pricing'
     | '/en/services'
+    | '/blog/'
     | '/en/'
+    | '/en/blog/$slug'
+    | '/en/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,11 +179,15 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/services'
     | '/sitemap.xml'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/contact'
     | '/en/pricing'
     | '/en/services'
+    | '/blog'
     | '/en'
+    | '/en/blog/$slug'
+    | '/en/blog'
   id:
     | '__root__'
     | '/'
@@ -152,11 +196,15 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/services'
     | '/sitemap.xml'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/contact'
     | '/en/pricing'
     | '/en/services'
+    | '/blog/'
     | '/en/'
+    | '/en/blog/$slug'
+    | '/en/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -166,11 +214,15 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   EnAboutRoute: typeof EnAboutRoute
   EnContactRoute: typeof EnContactRoute
   EnPricingRoute: typeof EnPricingRoute
   EnServicesRoute: typeof EnServicesRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   EnIndexRoute: typeof EnIndexRoute
+  EnBlogSlugRoute: typeof EnBlogSlugRoute
+  EnBlogIndexRoute: typeof EnBlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -217,6 +269,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/en/': {
       id: '/en/'
       path: '/en'
@@ -252,6 +318,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/blog/': {
+      id: '/en/blog/'
+      path: '/en/blog'
+      fullPath: '/en/blog/'
+      preLoaderRoute: typeof EnBlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/blog/$slug': {
+      id: '/en/blog/$slug'
+      path: '/en/blog/$slug'
+      fullPath: '/en/blog/$slug'
+      preLoaderRoute: typeof EnBlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -262,11 +342,15 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BlogSlugRoute: BlogSlugRoute,
   EnAboutRoute: EnAboutRoute,
   EnContactRoute: EnContactRoute,
   EnPricingRoute: EnPricingRoute,
   EnServicesRoute: EnServicesRoute,
+  BlogIndexRoute: BlogIndexRoute,
   EnIndexRoute: EnIndexRoute,
+  EnBlogSlugRoute: EnBlogSlugRoute,
+  EnBlogIndexRoute: EnBlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

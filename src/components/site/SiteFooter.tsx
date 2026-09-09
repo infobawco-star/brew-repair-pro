@@ -53,6 +53,11 @@ export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
                   </Link>
                 </li>
                 <li>
+                  <Link to={`${prefix}/blog`} className="hover:text-primary">
+                    {english ? "Blog" : "المدونة"}
+                  </Link>
+                </li>
+                <li>
                   <Link to={`${prefix}/about`} className="hover:text-primary">
                     {english ? "About" : "من نحن"}
                   </Link>
