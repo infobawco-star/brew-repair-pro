@@ -3,6 +3,7 @@ import { Instagram, Phone, Mail, MapPin } from "lucide-react";
 import { CONTACT } from "../../lib/contact.config";
 import type { Locale } from "./PageShell";
 import { LOGO_URL } from "./logo";
+import mocLogo from "../../assets/moc-logo.png";
 
 export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
   const english = locale === "en";
