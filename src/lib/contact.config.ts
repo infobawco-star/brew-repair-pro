@@ -7,4 +7,6 @@ export const CONTACT = {
   phoneDisplay: "+966 50 028 2746",
   city: "الرياض",
   coverage: "الرياض — تغطية لجميع مناطق المملكة",
+  // رقم السجل التجاري (وزارة التجارة السعودية)
+  crNumber: "7055098987",
 } as const;
