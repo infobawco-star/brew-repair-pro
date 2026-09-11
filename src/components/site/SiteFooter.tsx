@@ -91,8 +91,24 @@ export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-border pt-6 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} FixBar. {english ? "All rights reserved." : "جميع الحقوق محفوظة."}
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 md:flex-row">
+          <div className="flex items-center gap-3 rounded-xl border border-border bg-background/60 px-4 py-2">
+            <img
+              src={mocLogo}
+              alt={english ? "Saudi Ministry of Commerce" : "وزارة التجارة السعودية"}
+              width={40}
+              height={40}
+              loading="lazy"
+              className="size-10 object-contain"
+            />
+            <div className="flex flex-col text-xs">
+              <span className="font-bold text-foreground">{english ? "Commercial Registration No." : "رقم السجل التجاري"}</span>
+              <span dir="ltr" className="text-muted-foreground">{CONTACT.crNumber}</span>
+            </div>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} FixBar. {english ? "All rights reserved." : "جميع الحقوق محفوظة."}
+          </p>
         </div>
       </div>
     </footer>
