@@ -3,7 +3,6 @@ import { Instagram, Phone, Mail, MapPin } from "lucide-react";
 import { CONTACT } from "../../lib/contact.config";
 import type { Locale } from "./PageShell";
 import { LOGO_URL } from "./logo";
-import mocLogo from "../../assets/moc-logo.png";
 
 export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
   const english = locale === "en";
@@ -94,7 +93,7 @@ export function SiteFooter({ locale = "ar" }: { locale?: Locale }) {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 md:flex-row">
           <div className="flex items-center gap-3 rounded-xl border border-border bg-background/60 px-4 py-2">
             <img
-              src={mocLogo}
+              src="/Ministry-of-Commerce-01.webp"
               alt={english ? "Saudi Ministry of Commerce" : "وزارة التجارة السعودية"}
               width={40}
               height={40}
